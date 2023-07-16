@@ -29,10 +29,9 @@ export default function NewUser({distributorId}){
         setIsLoading(true)
         axios.post('/api/newUser',data).then(()=>{
             toast.success('User has been added');
-            setData(initialData)
-            setTimeout(()=>{
-                router.refresh()
-            },500)
+            setData(initialData);
+            router.refresh();
+            router.push('/dashboard');
             
         }).finally(()=>setIsLoading(false))
     }
