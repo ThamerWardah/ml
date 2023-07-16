@@ -1,5 +1,5 @@
 'use client'
-import { useState , useCallback ,useRef } from "react"
+import { useState , useCallback ,useEffect } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import {toast} from 'react-hot-toast'
@@ -22,11 +22,11 @@ const AddDistributor = ()=>{
     const [variant , setVariant] = useState('signin');
     const [isLoading , setIsLoading] = useState(false);
 
-    useRef(()=>{
-        if(session?.status ==='authenticated'){
+    useEffect(()=>{
+        if(session?.status === 'authenticated'){
             router.push('/dashboard')
         }
-    },[router])
+    },[session?.status,router])
 
     const toggleVariant = useCallback(()=>{
         variant === 'signin'?setVariant('login'):setVariant('signin')
