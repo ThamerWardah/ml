@@ -1,17 +1,16 @@
 'use client'
-import { useState , useCallback  } from "react"
+import { useState , useCallback ,useRef } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import {toast} from 'react-hot-toast'
 import clsx from 'clsx'
-import {signIn} from 'next-auth/react'
+import {signIn , useSession} from 'next-auth/react'
 
 import Input from './Input'
 
-
 const AddDistributor = ()=>{
+    const session = useSession();
 
-    
     const initialData ={
         name:'',
         email:'',
@@ -22,6 +21,12 @@ const AddDistributor = ()=>{
     const [data ,setData] = useState(initialData);
     const [variant , setVariant] = useState('signin');
     const [isLoading , setIsLoading] = useState(false);
+
+    useRef(()=>{
+        if(session?.status ==='authenticated'){
+            router.push('/dashboard')
+        }
+    },[router])
 
     const toggleVariant = useCallback(()=>{
         variant === 'signin'?setVariant('login'):setVariant('signin')
@@ -34,11 +39,11 @@ const AddDistributor = ()=>{
         if(variant === 'signin'){
         axios.post('/api/register',data).then((callback)=>{
                  if(!callback?.error){
-                      toast.success('Done');
-                      setData(initialData);
-                      setTimeout(()=>{
-                             router.refresh()
-                        },500)
+                        toast.success('Done');
+                        setData(initialData);
+                        router.refresh();
+                        signIn('credentials',{...data,redirect:false});
+                        
                            };
                  if(callback?.error){toast.error(callback.error)}
                                                     
