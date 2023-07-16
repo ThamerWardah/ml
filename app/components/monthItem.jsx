@@ -18,7 +18,7 @@ const MonthItem = ({monthsData , id ,phone})=>{
     },[isOpen]);
 
     const handleRedirect = () => {
-        window.open(`https://api.whatsapp.com/send?phone=00964${phone.slice(1,-1)}&text=${sendData.aMoney}
+        window.open(`https://api.whatsapp.com/send?phone=00964${phone.slice(1,)}&text=${sendData.aMoney}
                                                                                         ${sendData.aMonth}`, '_blank');
       };
 
