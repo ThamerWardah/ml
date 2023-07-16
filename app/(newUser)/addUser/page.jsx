@@ -5,7 +5,7 @@ const TheUserAdd = async () => {
     const theCurrentUser = await currentUser();
     const currentUserId = theCurrentUser?.id || '' ;
     return(
-        <div className='h-screen flex w-full'>
+        <div className='h-full flex w-full'>
             <div className='m-auto w-full'>
             <NewUser distributorId={currentUserId} />
             </div>

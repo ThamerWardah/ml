@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import currentDistributorUsers from '../../actions/getAllUsers';
-import Mon from '../../components/Month';
 import MonthItem from '../../components/monthItem';
 import UserMonth from '../../actions/getActiveUserMonths';
+
 
 const singleUser = async ({params})=>{
    const theUserMonth = await UserMonth(params.id)
@@ -13,7 +13,7 @@ const singleUser = async ({params})=>{
     const user =Users?.filter((item)=>item.id === params.id)
 
     return(
-        <div className='lg:flex w-full'> 
+        <div className='lg:flex w-full h-full relative'> 
         <div className='sm:w-screen md:w-screen lg:mx-auto lg:w-3/4'>
             <div className='w-full flex flex-col'>
                 <div className='flex justify-between items-center px-2'>
@@ -26,9 +26,8 @@ const singleUser = async ({params})=>{
 
                </div>
             </div>
-                     <MonthItem monthsData={months}/>  
-                    <Mon id={user[0].id}/> 
                     
+                     <MonthItem monthsData={months} id={user[0].id} phone={user[0].phone}/>   
              </div>
      </div>
     )
