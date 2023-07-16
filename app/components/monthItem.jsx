@@ -18,7 +18,7 @@ const MonthItem = ({monthsData , id ,phone})=>{
     },[isOpen]);
 
     const handleRedirect = () => {
-        window.open(`https://api.whatsapp.com/send?phone=+964${phone.slice(1,)}&text=${sendData.aMoney}           ${sendData.aMonth}`, '_blank');
+        window.open(`https://api.whatsapp.com/send?phone=+964${phone.slice(1,)}&text=تاريخ الاشتراك ---${sendData.aDate}          سعر الاشتراك---${sendData.aMoney} `, '_blank');
       };
 
     const handleDelete = async(id)=>{  
@@ -61,7 +61,7 @@ const MonthItem = ({monthsData , id ,phone})=>{
                     <div onClick={()=>toggleIsOpen()} className="absolute top-2 right-2">
                     <AiOutlineDoubleLeft className="text-green-300 cursor-pointer font-bold text-2xl animate-pulse" /> </div>
                     <h1 dir="rtl"> تاريخ الاشتراك ---{sendData.aMonth}</h1>
-                    <h1 dir="rtl">  سعر الاشتراك ---{sendData.aMoney}</h1>
+                    <h1 dir="rtl">  سعر الاشتراك---{sendData.aMoney}</h1>
                     <h1 dir="rtl">  تاريخ الاشتراك ---{sendData.aDate}</h1>
                      <div className="absolute bottom-2 right-2">
                      <AiOutlineWhatsApp onClick={()=>{
