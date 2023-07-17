@@ -30,7 +30,7 @@ export default function NewUser({distributorId}){
             return null
         }
         data.phone.length!==0?(data.phone.startsWith('078')||data.phone.startsWith('077')?(data.phone.length<11?toast.error('Phone number must consist of 11 digits'):null):toast.error('Phone Number must starts with 077 or 078')):{}
-        if((data.phone.length !==0)&&(data.phone.startsWith('077')||data.phone.startsWith('078'))&&(data.phone.length>=10)){
+        if((data.phone.length !==0)&&(data.phone.startsWith('077')||data.phone.startsWith('078'))&&(data.phone.length>=11)){
         setIsLoading(true)
         axios.post('/api/newUser',data).then(()=>{
             toast.success('User has been added');

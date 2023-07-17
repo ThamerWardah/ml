@@ -18,7 +18,7 @@ const MonthItem = ({monthsData , id ,phone})=>{
     },[isOpen]);
 
     const handleRedirect = () => {
-        window.open(`https://api.whatsapp.com/send?phone=+964${phone.slice(1,)}&text=تاريخ الاشتراك ---${sendData.aDate}          سعر الاشتراك---${sendData.aMoney} `, '_blank');
+        window.open(`https://api.whatsapp.com/send?phone=+964${phone.slice(1,)}&text=تاريخ الاشتراك ---${sendData.aDate}            سعر الاشتراك---${sendData.aMoney} `, '_blank');
       };
 
     const handleDelete = async(id)=>{  

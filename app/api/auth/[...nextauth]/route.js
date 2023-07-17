@@ -4,6 +4,8 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import CredentialsProvider  from 'next-auth/providers/credentials';
 import NextAuth  from 'next-auth/next';
 import bcrypt from 'bcrypt';
+import { sign } from 'crypto';
+import { signIn } from 'next-auth/react';
 
 
 export const authOptions = {
@@ -34,11 +36,12 @@ export const authOptions = {
                     }
         }),
     ],
+   
     session:{
         strategy:'jwt'
     },
     debug:process.env.NODE_ENV === 'development',
-    secret:process.env.NEXT_SECRET
+    secret:process.env.NEXTAUTH_SECRET
     
 };
 

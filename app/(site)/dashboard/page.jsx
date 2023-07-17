@@ -8,7 +8,7 @@ export default async function dashboard(){
             <div>_________________________________________</div>
           <div className="flex flex-col gap-4"> {Users.map((user)=>(
             <div key={user.id}>
-            <h1 className="font-bold"><Link href={`/${user.id}`}>{user.name}</Link></h1>
+            <h1 className="font-bold"><Link href={`/users/${user.id}`}>{user.name}</Link></h1>
             <h2 className="text-xs text-gray-400">{user.username}</h2>
             </div>
           ))}

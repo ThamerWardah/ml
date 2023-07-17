@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import currentDistributorUsers from '../../actions/getAllUsers';
-import MonthItem from '../../components/monthItem';
-import UserMonth from '../../actions/getActiveUserMonths';
+import currentDistributorUsers from '../../../actions/getAllUsers';
+import MonthItem from '../../../components/monthItem';
+import UserMonth from '../../../actions/getActiveUserMonths';
 
 
 const singleUser = async ({params})=>{
