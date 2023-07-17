@@ -26,6 +26,11 @@ export default function NewUser({distributorId}){
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
+        if(data.name.length===0 || data.username.length===0){
+            return null
+        }
+        data.phone.length!==0?(data.phone.startsWith('078')||data.phone.startsWith('077')?(data.phone.length<11?toast.error('Phone number must consist of 11 digits'):null):toast.error('Phone Number must starts with 077 or 078')):{}
+        if((data.phone.length !==0)&&(data.phone.startsWith('077')||data.phone.startsWith('078'))&&(data.phone.length>=10)){
         setIsLoading(true)
         axios.post('/api/newUser',data).then(()=>{
             toast.success('User has been added');
@@ -33,7 +38,25 @@ export default function NewUser({distributorId}){
             router.refresh();
             router.push('/dashboard');
             
+        }).finally(()=>setIsLoading(false))}
+
+        if(data.phone.length ===0){
+            setIsLoading(true)
+        axios.post('/api/newUser',data).then(()=>{
+            toast.success('User has been added');
+            setData(initialData);
+            router.refresh();
+            router.push('/dashboard');
+            
         }).finally(()=>setIsLoading(false))
+        }
+    }
+
+    const handleChang = (e)=>{
+        if(data.phone.length>=11 && e.target.value.length>11){return null}
+        let phonevalue = (e.target.value).split('').filter((i)=> (parseInt(i)) <= 9).join('');
+            
+        setData({...data,phone:phonevalue})
     }
 
     return(
@@ -48,7 +71,7 @@ export default function NewUser({distributorId}){
 
                    <Input type='text' placeholder='Username' disabled={isLoading} value={data.username} onChange={(e)=>setData({...data,username:e.target.value})}/>
 
-                   <Input type='text' placeholder='Phone Number' disabled={isLoading} value={data.phone} onChange={(e)=>setData({...data,phone:e.target.value})}/>
+                   <Input type='tel' placeholder='Phone Number' disabled={isLoading} value={data.phone} onChange={handleChang}/>
                     <button disabled={isLoading} className={clsx(`border-2 rounded-tr-full mt-4 rounded-bl-full bg-gradient-to-tr from-blue-500 to-green-300 shadow-lg shadow-gray-400 border-none  text-gray-800 font-bold`,isLoading&&'opacity-50')}>Add User</button>
                 </form>
             </div>
