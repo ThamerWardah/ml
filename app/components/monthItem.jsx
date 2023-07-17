@@ -47,10 +47,10 @@ const MonthItem = ({monthsData , id ,phone})=>{
                     </div>
                     <div>{item.note}</div>
 
-                    <AiOutlineWhatsApp onClick={()=>{
+                    {phone.length !==0 && <AiOutlineWhatsApp onClick={()=>{
                         toggleIsOpen()
                         setSendData({...sendData,aMonth:item.month,aMoney:item.money,aDate:JSON.stringify(item.createdAt).slice(1,11)})
-                    }} className="text-green-400 font-bold text-2xl cursor-pointer" />
+                    }} className="text-green-400 font-bold text-2xl cursor-pointer" /> }
                     </div>
                 ))}
              </div> }
