@@ -10,7 +10,7 @@ import Input from './Input'
 
 const AddDistributor = ()=>{
     const session = useSession();
-
+    
     const initialData ={
         name:'',
         email:'',

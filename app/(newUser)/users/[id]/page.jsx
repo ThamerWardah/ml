@@ -27,7 +27,7 @@ const singleUser = async ({params})=>{
                </div>
             </div>
                     
-                     <MonthItem monthsData={months} id={user[0].id} phone={user[0].phone}/>   
+                     <MonthItem monthsData={months} user={user[0]}/>   
              </div>
      </div>
     )

@@ -7,7 +7,7 @@ import { useState ,useCallback } from "react"
 import clsx from "clsx"
 import Mon from "./Month"
 
-const MonthItem = ({monthsData , id ,phone})=>{ 
+const MonthItem = ({monthsData,user})=>{ 
     const router = useRouter();
     const monthData = monthsData
     const [isOpen , setIsOpen] = useState(false);
@@ -18,7 +18,7 @@ const MonthItem = ({monthsData , id ,phone})=>{
     },[isOpen]);
 
     const handleRedirect = () => {
-        window.open(`https://api.whatsapp.com/send?phone=+964${phone.slice(1,)}&text=تاريخ الاشتراك ---${sendData.aDate}            سعر الاشتراك---${sendData.aMoney} `, '_blank');
+        window.open(`https://api.whatsapp.com/send?phone=+964${user.phone.slice(1,)}&text=تاريخ الاشتراك ---${sendData.aDate}                       سعر الاشتراك---${sendData.aMoney}                                  `, '_blank');
       };
 
     const handleDelete = async(id)=>{  
@@ -47,20 +47,20 @@ const MonthItem = ({monthsData , id ,phone})=>{
                     </div>
                     <div>{item.note}</div>
 
-                    {phone.length !==0 && <AiOutlineWhatsApp onClick={()=>{
+                    {user.phone.length !==0 && <AiOutlineWhatsApp onClick={()=>{
                         toggleIsOpen()
-                        setSendData({...sendData,aMonth:item.month,aMoney:item.money,aDate:JSON.stringify(item.createdAt).slice(1,11)})
+                        setSendData({...sendData,aMoney:item.money,aDate:JSON.stringify(item.createdAt).slice(1,11)})
                     }} className="text-green-400 font-bold text-2xl cursor-pointer" /> }
                     </div>
                 ))}
              </div> }
-            <Mon id={id}/> 
+            <Mon id={user.id}/> 
 
              { isOpen &&<div className={clsx(`flex justify-center items-center absolute top-0 left-0 w-full h-full bg-gradient-to-l from-red-600/50 to-green-300/60`)}>
                 <div className="relative bg-black/80 text-white shadow-lg mx-26 rounded-lg p-20">
                     <div onClick={()=>toggleIsOpen()} className="absolute top-2 right-2">
                     <AiOutlineDoubleLeft className="text-green-300 cursor-pointer font-bold text-2xl animate-pulse" /> </div>
-                    <h1 dir="rtl"> تاريخ الاشتراك ---{sendData.aMonth}</h1>
+                    <h1 dir="rtl"> </h1>
                     <h1 dir="rtl">  سعر الاشتراك---{sendData.aMoney}</h1>
                     <h1 dir="rtl">  تاريخ الاشتراك ---{sendData.aDate}</h1>
                      <div className="absolute bottom-2 right-2">
