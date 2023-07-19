@@ -9,7 +9,7 @@ const HomePage = () => {
             alt="Muharam"
             height={840}
             width={640}
-            className='h-auto'
+            className='h-auto scale-x-[-1]'
            />
         
         </div>

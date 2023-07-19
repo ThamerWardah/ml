@@ -91,7 +91,7 @@ const MonthItem = ({monthsData,user,adminName})=>{
             <Mon id={user.id}/> 
 
              { isOpen &&<div className={clsx(`flex justify-center items-center absolute top-0 left-0 w-full h-full bg-gradient-to-l from-red-600/50 to-green-300/60`)}>
-                <div className="relative bg-black/80 text-white shadow-lg mx-26 rounded-lg p-20">
+                <div className="relative bg-black/80 text-white shadow-lg mx-26 rounded-lg p-10">
                     <div onClick={()=>toggleIsOpen()} className="absolute top-2 right-2">
                     <AiOutlineDoubleLeft className="text-green-300 cursor-pointer font-bold text-2xl animate-pulse" /> </div>
                     <div dir="rtl" className=" gap-y-4 "> 
