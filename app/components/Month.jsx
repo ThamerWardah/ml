@@ -26,6 +26,7 @@ const Mon = ({id})=>{
     const handleSubmit = async(e)=>{
         e.preventDefault();
         setIsLoading(true)
+        data.payed === '' ?(data.payed=data.money):null;
         axios.post('/api/newMonth',data).then((callback)=>{
            if(!callback?.error){
             toast.success('Done');

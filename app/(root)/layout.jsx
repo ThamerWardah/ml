@@ -6,7 +6,7 @@ const HomeLayout = ({children})=>{
             <Nav />
             </nav>
 
-            <div className="h-full w-full bg-black"> 
+            <div className="bg-black"> 
             {children}
             </div>
         </div>

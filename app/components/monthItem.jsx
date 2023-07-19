@@ -7,7 +7,7 @@ import { useState ,useCallback } from "react"
 import clsx from "clsx"
 import Mon from "./Month"
 
-const MonthItem = ({monthsData,user})=>{ 
+const MonthItem = ({monthsData,user,adminName})=>{ 
     const router = useRouter();
     const monthData = monthsData
     const [isOpen , setIsOpen] = useState(false);
@@ -17,6 +17,7 @@ const MonthItem = ({monthsData,user})=>{
     let tot = 0
     const tot2 = totalDebt.map((item)=>tot+=parseFloat(item))
     const theTotall = tot2[totalDebt.length - 1]
+
     const toggleIsOpen = useCallback(()=>{
         if(isOpen){setIsOpen(false)}else{setIsOpen(true)}
     },[isOpen]);
@@ -27,7 +28,7 @@ const MonthItem = ({monthsData,user})=>{
 
 
         
-                                                                                                *مكتبه تاج اللورد للانترنت*
+                                                                                                *_${adminName}_*
                                                                                         *تحية طيبة عزيزي المشترك*
                                                                                         تم تفعيل اشتراك الانترنت  
                                                                                         اسم المشترك :${user.name}
@@ -75,7 +76,7 @@ const MonthItem = ({monthsData,user})=>{
                         setSendData({...sendData,aPayed:item.payed ,aMoney:item.money,aDate:JSON.stringify(item.createdAt).slice(1,11),
                             
                             expireDate:
-                                [(JSON.stringify(item.createdAt).slice(1,11).split('-'))[0] ,
+                                [parseInt((JSON.stringify(item.createdAt).slice(1,11).split('-')[1]))  < 12 ?(JSON.stringify(item.createdAt).slice(1,11).split('-'))[0]: parseInt((JSON.stringify(item.createdAt).slice(1,11).split('-')[0]))+1 ,
                                 
                                 (parseInt((JSON.stringify(item.createdAt).slice(1,11).split('-')[1])) <12 ? parseInt((JSON.stringify(item.createdAt).slice(1,11)?.split('-')[1]))+1:1 ),
                                 
@@ -96,7 +97,7 @@ const MonthItem = ({monthsData,user})=>{
                     <div dir="rtl" className=" gap-y-4 "> 
 
                         <h1 className="font-bold text-2xl text-fuchsia-300">
-                        مكتبه تاج اللورد للانترنت 
+                                                   {adminName}
 
                         </h1><h1>
 
