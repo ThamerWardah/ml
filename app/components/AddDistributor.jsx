@@ -58,7 +58,7 @@ const AddDistributor = ()=>{
     }
 
     return(
-        <div>
+        <div className="w-full h-full">
         <div className="flex justify-center mt-10 ">
        
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-3/4 mb-20">
@@ -72,7 +72,8 @@ const AddDistributor = ()=>{
                     <button className={clsx(`border-2 rounded-tr-full mt-4 rounded-bl-full bg-gradient-to-tr from-blue-500 to-green-300 shadow-lg shadow-gray-400 border-none  text-gray-800 font-bold`,isLoading&&'opacity-50 ')}>{variant ==='signin' ?"Register":"Sign in"}</button>
                 </form>
         </div>
-        <div className="text-centerflex gap-2  ">{variant === 'signin'?"Sign in" : "Register"}<button className="underline text-gray-500 " type="button" onClick={()=>toggleVariant()}>{variant === 'signin'?"Sign in" : "Register"}</button></div>
+
+        <div className="text-center flex gap-4 justify-center "><h1>{variant === 'signin'?"Already have an account" : "Create new account"}</h1><button className="underline text-gray-500 " type="button" onClick={()=>toggleVariant()}>{variant === 'signin'?"Sign in" : "Register"}</button></div>
         </div>
     )
 }

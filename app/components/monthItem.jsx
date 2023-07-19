@@ -27,7 +27,7 @@ const MonthItem = ({monthsData,user})=>{
 
 
         
-                                                                                                *مكتبه تاج اللورد للالنت *
+                                                                                                *مكتبه تاج اللورد للانترنت*
                                                                                         *تحية طيبة عزيزي المشترك*
                                                                                         تم تفعيل اشتراك الانترنت  
                                                                                         اسم المشترك :${user.name}
@@ -96,7 +96,7 @@ const MonthItem = ({monthsData,user})=>{
                     <div dir="rtl" className=" gap-y-4 "> 
 
                         <h1 className="font-bold text-2xl text-fuchsia-300">
-                        مكتبه تاج اللورد للالنت 
+                        مكتبه تاج اللورد للانترنت 
 
                         </h1><h1>
 

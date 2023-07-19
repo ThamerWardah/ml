@@ -2,8 +2,8 @@ import Image from "next/image";
 const HomePage = () => {
  
     return(
-        <div className="h-full">
-        <div className=''>
+        <div className=" h-full">
+        
            <Image 
             src='/rayah.jpg'
             alt="Muharam"
@@ -11,7 +11,7 @@ const HomePage = () => {
             width={640}
             className='h-auto'
            />
-        </div>
+        
         </div>
     )
 };
