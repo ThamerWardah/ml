@@ -2,7 +2,7 @@ import Image from "next/image";
 const HomePage = () => {
  
     return(
-        <div className="mt-10">
+        <div className="h-full">
         <div className=''>
            <Image 
             src='/rayah.jpg'

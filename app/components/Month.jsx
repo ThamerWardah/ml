@@ -13,6 +13,7 @@ const Mon = ({id})=>{
     const initialData ={
         month:'',
         money:'',
+        payed:'',
         note:'',
         userId:userId,
     }
@@ -44,7 +45,9 @@ const Mon = ({id})=>{
 
                    <Input type='text' placeholder='Month' disabled={isLoading} value={data.month} onChange={(e)=>setData({...data,month:e.target.value})}/>
 
-                   <Input type='text' placeholder='0.0$' disabled={isLoading} value={data.money} onChange={(e)=>setData({...data,money:e.target.value})}/>
+                   <Input type='tel' placeholder='0.0$' disabled={isLoading} value={data.money} onChange={(e)=>setData({...data,money:e.target.value})}/>
+                   
+                   <Input type='tel' placeholder='💸💸' disabled={isLoading} value={data.payed} onChange={(e)=>setData({...data,payed:e.target.value})}/>
 
                    <Input type='text' placeholder='Notes' disabled={isLoading} value={data.note} onChange={(e)=>setData({...data,note:e.target.value})}/>
 

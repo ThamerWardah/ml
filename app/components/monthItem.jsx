@@ -11,14 +11,37 @@ const MonthItem = ({monthsData,user})=>{
     const router = useRouter();
     const monthData = monthsData
     const [isOpen , setIsOpen] = useState(false);
-    const [sendData,setSendData]=useState({aMonth:'',aMoney:'',aDate:''})
-
+    const [sendData,setSendData]=useState({aPayed:'',aMoney:'',aDate:'',expireDate:'',totall:''})
+   
+    const totalDebt = monthData.map((item)=>(parseFloat(item.money)-parseFloat(item.payed)));
+    let tot = 0
+    const tot2 = totalDebt.map((item)=>tot+=parseFloat(item))
+    const theTotall = tot2[totalDebt.length - 1]
     const toggleIsOpen = useCallback(()=>{
         if(isOpen){setIsOpen(false)}else{setIsOpen(true)}
     },[isOpen]);
 
+
     const handleRedirect = () => {
-        window.open(`https://api.whatsapp.com/send?phone=+964${user.phone.slice(1,)}&text=تاريخ الاشتراك ---${sendData.aDate}                       سعر الاشتراك---${sendData.aMoney}                                  `, '_blank');
+        window.open(`https://api.whatsapp.com/send?phone=+964${user.phone.slice(1,)}&text=
+
+
+        
+                                                                                                *مكتبه تاج اللورد للالنت *
+                                                                                        *تحية طيبة عزيزي المشترك*
+                                                                                        تم تفعيل اشتراك الانترنت  
+                                                                                        اسم المشترك :${user.name}
+                                                                                        كلفة الاشتراك : *${sendData.aMoney}000* د.ع 
+                                                                                        المبلغ الواصل : *${sendData.aPayed}000* د.ع 
+                                                                                        المبلغ المتبقي : *${(parseFloat(sendData.aMoney)-parseFloat(sendData.aPayed))}000* د.ع 
+                                                                                        مجموع الديون الكلي : *${sendData.totall}000* د.ع 
+                                                                                        تاريخ انتهاء الاشتراك : ${sendData.expireDate}
+
+
+                                                                                        *علماً ان هذه الرساله الكترونيه عن طريق الحاسبه*      
+        
+        
+        `, '_blank');
       };
 
     const handleDelete = async(id)=>{  
@@ -49,7 +72,17 @@ const MonthItem = ({monthsData,user})=>{
 
                     {user.phone.length !==0 && <AiOutlineWhatsApp onClick={()=>{
                         toggleIsOpen()
-                        setSendData({...sendData,aMoney:item.money,aDate:JSON.stringify(item.createdAt).slice(1,11)})
+                        setSendData({...sendData,aPayed:item.payed ,aMoney:item.money,aDate:JSON.stringify(item.createdAt).slice(1,11),
+                            
+                            expireDate:
+                                [(JSON.stringify(item.createdAt).slice(1,11).split('-'))[0] ,
+                                
+                                (parseInt((JSON.stringify(item.createdAt).slice(1,11).split('-')[1])) <12 ? parseInt((JSON.stringify(item.createdAt).slice(1,11)?.split('-')[1]))+1:1 ),
+                                
+                                (JSON.stringify(item.createdAt).slice(1,11).split('-'))[2]].join('-') ,totall:theTotall
+                                })
+
+
                     }} className="text-green-400 font-bold text-2xl cursor-pointer" /> }
                     </div>
                 ))}
@@ -60,9 +93,44 @@ const MonthItem = ({monthsData,user})=>{
                 <div className="relative bg-black/80 text-white shadow-lg mx-26 rounded-lg p-20">
                     <div onClick={()=>toggleIsOpen()} className="absolute top-2 right-2">
                     <AiOutlineDoubleLeft className="text-green-300 cursor-pointer font-bold text-2xl animate-pulse" /> </div>
-                    <h1 dir="rtl"> </h1>
-                    <h1 dir="rtl">  سعر الاشتراك---{sendData.aMoney}</h1>
-                    <h1 dir="rtl">  تاريخ الاشتراك ---{sendData.aDate}</h1>
+                    <div dir="rtl" className=" gap-y-4 "> 
+
+                        <h1 className="font-bold text-2xl text-fuchsia-300">
+                        مكتبه تاج اللورد للالنت 
+
+                        </h1><h1>
+
+                                                                                        تحية طيبة عزيزي المشترك
+                        </h1><h1>
+
+                                                                                        تم تفعيل اشتراك الانترنت  
+                        </h1><h1>
+
+                                                                                        اسم المشترك : {user.name}
+                        </h1><h1>
+
+                                                                                        كلفة الاشتراك : {sendData.aMoney}000 د.ع 
+                        </h1><h1>
+
+                                                                                        المبلغ الواصل : {sendData.aPayed}000 د.ع 
+                        </h1><h1>
+
+                                                                                        المبلغ المتبقي : {(parseFloat(sendData.aMoney)-parseFloat(sendData.aPayed))}000 د.ع 
+                        </h1><h1>
+
+                                                                                        مجموع الديون الكلي :  {sendData.totall}000 د.ع 
+                        </h1><h1>
+                                                                                        تاريخ انتهاء الاشتراك : {sendData.expireDate}
+
+
+                        </h1><h1>
+                                                                                        علماً ان هذه الرساله الكترونيه عن طريق الحاسبه  
+
+                        </h1>
+
+                    </div>
+                 
+
                      <div className="absolute bottom-2 right-2">
                      <AiOutlineWhatsApp onClick={()=>{
                         toggleIsOpen();
