@@ -14,7 +14,8 @@ const AddDistributor = ()=>{
     const initialData ={
         name:'',
         email:'',
-        password:''
+        password:'',
+        department:'mathmatics'
     }
 
     const router = useRouter()
@@ -24,11 +25,14 @@ const AddDistributor = ()=>{
 
     useEffect(()=>{
         if(session?.status === 'authenticated'){
-            router.push('/dashboard')
+            router.push('/student')
+            console.log('Authenticated')
         }
+        console.log('Un authenticated')
     },[session?.status,router])
 
     const toggleVariant = useCallback(()=>{
+        console.log('Variant has been changed')
         variant === 'signin'?setVariant('login'):setVariant('signin')
     },[variant])
 
@@ -42,7 +46,7 @@ const AddDistributor = ()=>{
                         toast.success('Done');
                         setData(initialData);
                         router.refresh();
-                        signIn('credentials',{...data,redirect:false});
+                        signIn('credentials',{...data,redirect:false}); 
                         
                            };
                  if(callback?.error){toast.error(callback.error)}
@@ -65,9 +69,15 @@ const AddDistributor = ()=>{
 
                  {variant === 'signin' &&  <Input type='text' placeholder='Name' disabled={isLoading} value={data.name} onChange={(e)=>setData({...data,name:e.target.value})}/> }
 
-                   <Input type='email' placeholder='Email' disabled={isLoading} value={data.email} onChange={(e)=>setData({...data,email:e.target.value})}/>
+                   <Input  type='email' placeholder='Email' disabled={isLoading} value={data.email} onChange={(e)=>setData({...data,email:e.target.value})}/>
 
                    <Input type='password' placeholder='Password' disabled={isLoading} value={data.password} onChange={(e)=>setData({...data,password:e.target.value})}/>
+
+                   {variant === 'signin' &&  <select className="text-center font-bold text-sm" onChange={(e)=>setData({...data,department:e.target.value})}>
+                        <option value="mathmatics" >Mathmatics</option>
+                        <option value="bio">Bio</option>
+                        <option value="geology">Geology</option>
+                   </select> }
 
                     <button className={clsx(`border-2 rounded-tr-full mt-4 rounded-bl-full bg-gradient-to-tr from-blue-500 to-green-300 shadow-lg shadow-gray-400 border-none  text-gray-800 font-bold`,isLoading&&'opacity-50 ')}>{variant ==='signin' ?"Register":"Sign in"}</button>
                 </form>

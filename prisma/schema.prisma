@@ -10,36 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Distributor {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  name           String?
-  email          String   @unique
-  hashedPassword String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  users          User[]
+model Student {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  email      String     @unique
+  password   String
+  department String
+  finished   Finished[]
 }
 
-model User {
-  id            String      @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  username      String?
-  phone         String?
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  distributor   Distributor @relation(fields: [distributorId], references: [id], onDelete: Cascade)
-  distributorId String      @db.ObjectId
-  months        Month[]
-}
-
-model Month {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  month     String?
-  money     String?
-  payed     String?
-  note      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String   @db.ObjectId
+model Finished {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId String  @db.ObjectId
+  finished  String
 }

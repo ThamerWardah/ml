@@ -6,26 +6,27 @@ import bcrypt from 'bcrypt'
 export async function POST(request){
 
     const body = await request.json();
-    const {name ,email , password } = body ;
+    const {name, email, password, department } = body ;
 
-    if(!name || !email || !password){throw new Error("Missing some data")};
-
-    const hashedPassword = await bcrypt.hash(password,12);
-    const existed = await prisma.distributor.findUnique({
+    if(!name || !email || !password){throw new Error('Missing data')}
+    
+    const existed = await prisma.student.findUnique({
         where:{
-            email,
+            email
         }
     })
-
-    if(existed){throw new Error("User is already existed")}
-    const distributor = await prisma.distributor.create({
+       
+    if(existed){throw new Error('Email is already taken')}
+    const hashedPassword = await bcrypt.hash(password,12);
+    const student = await prisma.student.create({
         data:{
-            name ,
+            name,
             email,
-            hashedPassword
+            password:hashedPassword,
+            department
         }
     })
 
-    return NextResponse.json(distributor)
+    return NextResponse.json(student)
 
 }

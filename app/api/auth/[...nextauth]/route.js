@@ -4,8 +4,6 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import CredentialsProvider  from 'next-auth/providers/credentials';
 import NextAuth  from 'next-auth/next';
 import bcrypt from 'bcrypt';
-import { sign } from 'crypto';
-import { signIn } from 'next-auth/react';
 
 
 export const authOptions = {
@@ -22,17 +20,17 @@ export const authOptions = {
                 if(!credentials.email || !credentials.password){
                     throw new Error('credentials are required')}
 
-                    const user = await prisma.distributor.findUnique({
+                    const student = await prisma.student.findUnique({
                         where:{
                             email:credentials.email
                         }
                     })
-                    if(!user){throw new Error('No such user found')}
+                    if(!student){throw new Error('No such user found')}
                    
-                    const correctPassword = await bcrypt.compare(credentials.password,user.hashedPassword);
+                    const correctPassword = await bcrypt.compare(credentials.password,student.password);
                     if(!correctPassword){throw new Error('Inccorect password')}
 
-                    return user
+                    return student
                     }
         }),
     ],
